@@ -1,0 +1,12 @@
+import pandas as pd
+
+def second_highest_salary(employee: pd.DataFrame) -> pd.DataFrame:
+    secondSalary = employee.drop_duplicates('salary')
+    secondSalary['rank'] = secondSalary['salary'].rank(method='dense', ascending=False)
+    if len(secondSalary) >=2:
+        result = secondSalary[secondSalary['rank'] == 2][['salary']]
+
+    else: 
+        result = pd.DataFrame({'SecondHighestSalary': [None]})
+    return result.rename(columns={'salary': 'SecondHighestSalary'})
+
